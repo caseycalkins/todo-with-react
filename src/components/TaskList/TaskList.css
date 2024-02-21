@@ -1,0 +1,11 @@
+.task-list-wrapper {
+    display: flex;
+    justify-content: center;
+    height: 50%;
+    width: 85%;
+    margin: 0 auto;
+    padding: 1em;
+    /* Testing box */
+    background-color: white;
+    border: 1px dashed red;
+}

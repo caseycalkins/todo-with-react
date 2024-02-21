@@ -3,7 +3,8 @@
     justify-content: flex-end;
     align-items: center;
     height: 10%;
-    width: 100%;
+    width: 87.5%;
+    margin: 0 auto;
     border: 1px solid #000;
     background-color: #444444;
     color: #ffffff;
