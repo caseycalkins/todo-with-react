@@ -2,6 +2,7 @@ import React from 'react';
 import './Main.css';
 import Login from '../Login/Login';
 import AddTask from '../AddTask/AddTask';
+import TaskList from '../TaskList/TaskList';
 
 export default function Main() {
     return (
@@ -9,6 +10,7 @@ export default function Main() {
                 <h1>Todo App</h1>
                 <Login />
                 <AddTask />
+                <TaskList />
             </main>
     );
 }

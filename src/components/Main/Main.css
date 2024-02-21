@@ -1,9 +1,11 @@
 .main-container {
-    height: 80vh;
+    display: block;
+    text-align: center;
+    height: 100%;
     width: 90vw;
     border: 1px solid #000;
     margin: 0 auto;
-    background-color: #444444;
+    background-color: #fc0404;
     color: #ffffff;
 
 }
