@@ -1,0 +1,9 @@
+.main-container {
+    height: 80vh;
+    width: 90vw;
+    border: 1px solid #000;
+    margin: 0 auto;
+    background-color: #444444;
+    color: #ffffff;
+
+}
