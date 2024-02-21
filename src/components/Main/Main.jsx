@@ -5,6 +5,7 @@ import AddTask from '../AddTask/AddTask';
 import TaskList from '../TaskList/TaskList';
 
 export default function Main() {
+    const [tasks, setTasks] = React.useState([]);
     return (
             <main className="main-container">
                 <h1>Todo App</h1>
