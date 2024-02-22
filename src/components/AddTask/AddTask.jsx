@@ -11,31 +11,37 @@ import './AddTask.css';
 function BasicDatePicker({ onChange }) {
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker label="Due Date" onChange={onChange}/>
+            <DatePicker
+            label="Due Date"
+            onChange={onChange}
+            format="YYYY/MM/DD"
+        />
         </LocalizationProvider>
-      );
+    );
 }
 
 
 export default function AddTask() {
-    const [task, setTask] = useState('');
+    const [newTask, setNewTask] = useState('');
     const [taskDescription, setTaskDescription] = useState('');
     const [dueDate, setDueDate] = useState('');
 
-    const taskName = (event) => {
-        setTask(event.target.value);
+    const handleTaskNameChange = (event) => {
+        setNewTask(event.target.value);
     }
 
-    const taskDescriptionInput = (event) => {
+    const handleTaskDescriptionChange = (event) => {
         setTaskDescription(event.target.value);
     }
 
-    const dueDateInput = (event) => {
-        setDueDate(event.toISOString());
+    const handleDueDateChange = (date) => {
+        // date is a date object. format it to a string
+        setDueDate(date.format('YYYY-MM-DD'));
+        // setDueDate(date.toISOString());
     }
 
     const handleInputs = () => {
-        console.log(task, taskDescription, dueDate);
+        console.log(newTask, taskDescription, dueDate);
     }
 
     return (
@@ -51,14 +57,24 @@ export default function AddTask() {
                 noValidate
                 autoComplete="off"
             >
-                <TextField id="standard-basic" label="Add Task" />
-                <TextField id="standard-basic" label="Task Description" />
-                <BasicDatePicker onChange={dueDateInput}/>
+                <TextField
+                    id="standard-basic"
+                    label="Add Task"
+                    value={newTask}
+                    onChange={handleTaskNameChange}
+                />
+                <TextField
+                    id="standard-basic"
+                    label="Task Description"
+                    value={taskDescription}
+                    onChange={handleTaskDescriptionChange}
+                />
+                <BasicDatePicker onChange={handleDueDateChange}/>
                 <Button
-                className="add-task-button"
-                variant="contained"
-                color="warning"
-                onClick={handleInputs}
+                    className="add-task-button"
+                    variant="contained"
+                    color="warning"
+                    onClick={handleInputs}
                 >
                     Add Task
                 </Button>
