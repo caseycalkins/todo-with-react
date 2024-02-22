@@ -9,76 +9,81 @@ import { useState } from 'react';
 import './AddTask.css';
 
 function BasicDatePicker({ onChange }) {
-    return (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-            label="Due Date"
-            onChange={onChange}
-            format="YYYY/MM/DD"
-        />
-        </LocalizationProvider>
-    );
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DatePicker label='Due Date' onChange={onChange} format='YYYY/MM/DD' />
+    </LocalizationProvider>
+  );
 }
 
+export default function AddTask({ onAddTask }) {
+  const [newTask, setNewTask] = useState({
+    name: '',
+    description: '',
+    dueDate: '',
+  });
 
-export default function AddTask() {
-    const [newTask, setNewTask] = useState('');
-    const [taskDescription, setTaskDescription] = useState('');
-    const [dueDate, setDueDate] = useState('');
+  const handleNameChange = (e) => {
+    console.log(e.target.value);
+    setNewTask({ ...newTask, name: e.target.value });
+  };
 
-    const handleTaskNameChange = (event) => {
-        setNewTask(event.target.value);
+  const handleDescriptionChange = (e) => {
+    console.log(e.target.value);
+    setNewTask({ ...newTask, description: e.target.value });
+  };
+
+  const handleDueDateChange = (date) => {
+    setNewTask({ ...newTask, dueDate: date.format('YYYY-MM-DD') });
+  };
+
+  const handleAddTask = () => {
+    if (newTask.name.trim() === '') {
+      return;
     }
+    onAddTask(newTask);
+    setNewTask({
+      name: '',
+      description: '',
+      dueDate: '',
+    });
+  };
 
-    const handleTaskDescriptionChange = (event) => {
-        setTaskDescription(event.target.value);
-    }
-
-    const handleDueDateChange = (date) => {
-        // date is a date object. format it to a string
-        setDueDate(date.format('YYYY-MM-DD'));
-        // setDueDate(date.toISOString());
-    }
-
-    const handleInputs = () => {
-        console.log(newTask, taskDescription, dueDate);
-    }
-
-    return (
-        <div className="add-task-wrapper">
-            <Box
-                component="form"
-                sx={{
-                    '& > :not(style)': { m: 1, width: '25ch' },
-                    display: 'flex',
-                    alignItems: 'center',
-                    margin: 'auto',
-                }}
-                noValidate
-                autoComplete="off"
-            >
-                <TextField
-                    id="standard-basic"
-                    label="Add Task"
-                    value={newTask}
-                    onChange={handleTaskNameChange}
-                />
-                <TextField
-                    id="standard-basic"
-                    label="Task Description"
-                    value={taskDescription}
-                    onChange={handleTaskDescriptionChange}
-                />
-                <BasicDatePicker onChange={handleDueDateChange}/>
-                <Button
-                    className="add-task-button"
-                    variant="contained"
-                    color="warning"
-                    onClick={handleInputs}
-                >
-                    Add Task
-                </Button>
-            </Box>
-        </div>
-    )
+  return (
+    <div className='add-task-wrapper'>
+      <Box
+        component='form'
+        sx={{
+          '& > :not(style)': { m: 1, width: '25ch' },
+          display: 'flex',
+          alignItems: 'center',
+          margin: 'auto',
+        }}
+        noValidate
+        autoComplete='off'
+      >
+        <TextField
+          id='standard-basic'
+          label='Add Task'
+          value={newTask.name}
+          onChange={handleNameChange}
+        />
+        <TextField
+          id='standard-basic'
+          label='Task Description'
+          value={newTask.description}
+          onChange={handleDescriptionChange}
+        />
+        <BasicDatePicker onChange={handleDueDateChange} />
+        <Button
+          className='add-task-button'
+          variant='contained'
+          color='warning'
+          onClick={handleAddTask}
+        >
+          Add Task
+        </Button>
+      </Box>
+    </div>
+  );
 }
