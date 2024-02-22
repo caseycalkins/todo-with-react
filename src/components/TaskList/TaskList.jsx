@@ -15,21 +15,37 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-function BasicStack() {
+function BasicStack({ tasks, onSubmitTask }) {
   return (
-    <Box sx={{ width: '100%' }}>
-      <Stack spacing={2}>
-        <Typography noWrap></Typography>
-      </Stack>
-    </Box>
+    <>
+      <Box sx={{ width: '100%' }}>
+        <Stack spacing={2}>
+          <div>
+            {' '}
+            {/* Added a <div> as a block-level container */}
+            <ul>
+              {tasks.map((task, index) => (
+                <li key={index}>
+                  <Item>
+                    <Typography variant='h6'>{task.name}</Typography>
+                    <Typography variant='body1'>{task.description}</Typography>
+                    <Typography variant='body2'>{task.dueDate}</Typography>
+                  </Item>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Stack>
+      </Box>
+    </>
   );
 }
 
-export default function TaskList() {
+export default function TaskList({ tasks, onSubmitTask }) {
   return (
     <>
       <div className='task-list-wrapper'>
-        <BasicStack />
+        <BasicStack tasks={tasks} onSubmitTask={onSubmitTask} />
       </div>
     </>
   );

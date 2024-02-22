@@ -20,16 +20,14 @@ export default function AddTask({ onAddTask }) {
   const [newTask, setNewTask] = useState({
     name: '',
     description: '',
-    dueDate: '',
+    dueDate: null,
   });
-
+    // TODO: Handle empty values for name, description, and dueDate
   const handleNameChange = (e) => {
-    console.log(e.target.value);
     setNewTask({ ...newTask, name: e.target.value });
   };
 
   const handleDescriptionChange = (e) => {
-    console.log(e.target.value);
     setNewTask({ ...newTask, description: e.target.value });
   };
 
@@ -45,7 +43,7 @@ export default function AddTask({ onAddTask }) {
     setNewTask({
       name: '',
       description: '',
-      dueDate: '',
+      dueDate: null,
     });
   };
 
