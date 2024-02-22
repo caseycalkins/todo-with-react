@@ -5,7 +5,8 @@
     width: 85%;
     margin: 0 auto;
     padding: 1em;
+    overflow: scroll;
+    background-color: #444444;
     /* Testing box */
-    background-color: white;
     border: 1px dashed red;
 }
