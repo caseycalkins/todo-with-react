@@ -13,6 +13,7 @@ const Item = styled(Paper)(({ theme }) => ({
   margin: 'auto',
   textAlign: 'center',
   color: theme.palette.text.secondary,
+  overflow: 'auto',
 }));
 
 function BasicStack({ tasks, onSubmitTask }) {
@@ -21,15 +22,15 @@ function BasicStack({ tasks, onSubmitTask }) {
       <Box sx={{ width: '100%' }}>
         <Stack spacing={2}>
           <div>
-            {' '}
+            {/* {' '} */}
             {/* Added a <div> as a block-level container */}
             <ul>
               {tasks.map((task, index) => (
                 <li key={index}>
                   <Item>
-                    <Typography variant='h6'>{task.name}</Typography>
-                    <Typography variant='body1'>{task.description}</Typography>
-                    <Typography variant='body2'>{task.dueDate}</Typography>
+                <Typography variant='h6'>{task.name}</Typography>
+                <Typography variant='body1'>{task.description}</Typography>
+                <Typography variant='body2'>{task.dueDate}</Typography>
                   </Item>
                 </li>
               ))}
