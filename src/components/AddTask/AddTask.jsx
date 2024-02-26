@@ -22,7 +22,7 @@ export default function AddTask({ onAddTask }) {
     description: '',
     dueDate: null,
   });
-    // TODO: Handle empty values for name, description, and dueDate
+  // TODO: Handle empty values for name, description, and dueDate
   const handleNameChange = (e) => {
     setNewTask({ ...newTask, name: e.target.value });
   };
