@@ -5,13 +5,18 @@ import AddTask from '../AddTask/AddTask';
 import TaskList from '../TaskList/TaskList';
 
 export default function Main() {
-    const [tasks, setTasks] = React.useState([]);
-    return (
-            <main className="main-container">
-                <h1>Todo App</h1>
-                <Login />
-                <AddTask />
-                <TaskList />
-            </main>
-    );
+  const [tasks, setTasks] = React.useState([]);
+
+  const addTask = (newTask) => {
+    setTasks([...tasks, newTask]);
+  };
+
+  return (
+    <main className='main-container'>
+      <h1>Todo App</h1>
+      <Login />
+      <AddTask onAddTask={addTask} />
+      <TaskList tasks={tasks} />
+    </main>
+  );
 }

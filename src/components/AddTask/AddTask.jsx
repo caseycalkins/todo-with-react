@@ -9,60 +9,79 @@ import { useState } from 'react';
 import './AddTask.css';
 
 function BasicDatePicker({ onChange }) {
-    return (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker label="Due Date" onChange={onChange}/>
-        </LocalizationProvider>
-      );
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DatePicker label='Due Date' onChange={onChange} format='YYYY/MM/DD' />
+    </LocalizationProvider>
+  );
 }
 
+export default function AddTask({ onAddTask }) {
+  const [newTask, setNewTask] = useState({
+    name: '',
+    description: '',
+    dueDate: null,
+  });
+    // TODO: Handle empty values for name, description, and dueDate
+  const handleNameChange = (e) => {
+    setNewTask({ ...newTask, name: e.target.value });
+  };
 
-export default function AddTask() {
-    const [task, setTask] = useState('');
-    const [taskDescription, setTaskDescription] = useState('');
-    const [dueDate, setDueDate] = useState('');
+  const handleDescriptionChange = (e) => {
+    setNewTask({ ...newTask, description: e.target.value });
+  };
 
-    const taskName = (event) => {
-        setTask(event.target.value);
+  const handleDueDateChange = (date) => {
+    setNewTask({ ...newTask, dueDate: date.format('YYYY-MM-DD') });
+  };
+
+  const handleAddTask = () => {
+    if (newTask.name.trim() === '') {
+      return;
     }
+    onAddTask(newTask);
+    setNewTask({
+      name: '',
+      description: '',
+      dueDate: null,
+    });
+  };
 
-    const taskDescriptionInput = (event) => {
-        setTaskDescription(event.target.value);
-    }
-
-    const dueDateInput = (event) => {
-        setDueDate(event.toISOString());
-    }
-
-    const handleInputs = () => {
-        console.log(task, taskDescription, dueDate);
-    }
-
-    return (
-        <div className="add-task-wrapper">
-            <Box
-                component="form"
-                sx={{
-                    '& > :not(style)': { m: 1, width: '25ch' },
-                    display: 'flex',
-                    alignItems: 'center',
-                    margin: 'auto',
-                }}
-                noValidate
-                autoComplete="off"
-            >
-                <TextField id="standard-basic" label="Add Task" />
-                <TextField id="standard-basic" label="Task Description" />
-                <BasicDatePicker onChange={dueDateInput}/>
-                <Button
-                className="add-task-button"
-                variant="contained"
-                color="warning"
-                onClick={handleInputs}
-                >
-                    Add Task
-                </Button>
-            </Box>
-        </div>
-    )
+  return (
+    <div className='add-task-wrapper'>
+      <Box
+        component='form'
+        sx={{
+          '& > :not(style)': { m: 1, width: '25ch' },
+          display: 'flex',
+          alignItems: 'center',
+          margin: 'auto',
+        }}
+        noValidate
+        autoComplete='off'
+      >
+        <TextField
+          id='standard-basic'
+          label='Add Task'
+          value={newTask.name}
+          onChange={handleNameChange}
+        />
+        <TextField
+          id='standard-basic'
+          label='Task Description'
+          value={newTask.description}
+          onChange={handleDescriptionChange}
+        />
+        <BasicDatePicker onChange={handleDueDateChange} />
+        <Button
+          className='add-task-button'
+          variant='contained'
+          color='warning'
+          onClick={handleAddTask}
+        >
+          Add Task
+        </Button>
+      </Box>
+    </div>
+  );
 }
