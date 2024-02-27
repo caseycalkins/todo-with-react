@@ -11,12 +11,22 @@ export default function Main() {
     setTasks([...tasks, newTask]);
   };
 
+  const deleteTask = (index) => {
+    const newTasks = tasks.filter((task, i) => i !== index);
+    setTasks(newTasks);
+  }
+
   return (
     <main className='main-container'>
       <h1>Todo App</h1>
       <Login />
-      <AddTask onAddTask={addTask} />
-      <TaskList tasks={tasks} />
+      <AddTask
+        onAddTask={addTask}
+      />
+      <TaskList
+        tasks={tasks}
+        onDeleteTask={deleteTask}
+      />
     </main>
   );
 }
