@@ -32,9 +32,7 @@ function BasicStack({ tasks, onSubmitTask }) {
                     <Typography variant='body1'>{task.description}</Typography>
                     <Typography variant='body2'>{task.dueDate}</Typography>
                   </Item>
-                    <DeleteButton
-                        onDeleteTask={() => onSubmitTask(index)}
-                    />
+                  <DeleteButton onDeleteTask={() => onSubmitTask(index)} />
                 </li>
               ))}
             </ul>
